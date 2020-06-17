@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import Signup from "./components/Signup";
+import Welcome from "./components/Welcome";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [user, setUser] = useState({ firstName: "", email: "" });
+    return (
+        <Router>
+            <Switch>
+                <Route exact path="/signup">
+                    <Signup setUser={setUser} />
+                </Route>
+                {user.email && (
+                    <Route path="/welcome">
+                        <Welcome user={user} />
+                    </Route>
+                )}
+                <Route path="/">
+                    <Redirect to="/signup" />
+                </Route>
+            </Switch>
+        </Router>
+    );
+};
 
 export default App;
