@@ -3,7 +3,7 @@ import faker from "faker";
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "../App";
 
-describe("Cat Facts App", () => {
+describe.skip("Cat Facts App", () => {
     it("signs up and renders cat facts", async () => {
         render(<App />);
         const { getByLabelText, getByText } = screen;
